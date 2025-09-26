@@ -28,7 +28,7 @@
 
 1.  Клонируйте репозиторий:
     ```
-    git clone <ссылка_на_ваш_репозиторий>
+    git clone  https://github.com/zero2312/shop_price_list
     cd shop_price_list
     ```
 
