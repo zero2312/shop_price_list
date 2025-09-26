@@ -1,0 +1,34 @@
+{% extends "shop/base.html" %}
+{% block content %}
+<div class="container">
+    <ul class="product-list row">
+        {%for item in products%}
+        <li class="col-lg-3 p-4">
+            <div class="card" style="width: 18rem;">
+                <h5 class="card-title text-center">{{item.title}}</h5>
+                <img src="{{item.photo.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">{{item.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Цена - {{item.price}}₽</li>
+                    <!--? Через For проходимся по всем группам -->
+                    {% for group in request.user.groups.all %}
+                    <!--? Если группа пользователя 'VIP' - Вводим опт цену -->
+                    {% if group.name == 'VIP' %}
+                    <li class="list-group-item">Цена.опт - {{item.wholesalePrice}}₽</li>
+                    {% endif %}
+                    {% endfor %}
+                    <li class="list-group-item">Категория - {{item.category}}</li>
+                    <li class="list-group-item">Количество - {{item.cost}}</li>
+                </ul>
+                {% if user.is_authenticated %}
+                <div class="card-body">
+                    <a type="button" class="btn btn-success" href="{% url 'add_to_cart' product_id=item.pk%}">Купить</a>
+                </div>
+                {% endif %}
+                {% endfor %}
+        </li>
+    </ul>
+</div>
+{% endblock %}

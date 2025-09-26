@@ -1,0 +1,108 @@
+
+/* ?Основное */
+*{
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+}
+.selection-main{
+    margin-top: 20px;
+}
+
+.dropdown-item{
+
+    --bs-dropdown-link-active-bg: #623e70;
+}
+
+.btn-purple{
+    background-color: #623e63;
+    color: white;
+}
+
+.btn-purple:hover{
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #623e70;
+}
+
+a{
+    text-decoration: none;
+}
+
+/* ?Основное End */
+
+/* Карточка товара */
+.product-list{
+    list-style-type: none;
+}
+
+.card{
+    border-radius: 10px;
+    border: 0px;
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(0, 144, 255, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(0, 144, 255, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(0, 144, 255, 0.2);
+}
+
+.card-text{
+    font-family: 'Exo 2', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.list-group-item{
+    font-family: 'Exo 2', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.heder-produt-title{
+    font-family: 'Exo 2', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.card-title{
+    font-family: 'Exo 2', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+}
+/* Карточка товара End */
+
+.menu-container{
+    display: flex;
+    align-items: center;
+}
+
+/* Фильты */
+.filter-list{
+margin-right: 10px;
+}
+
+.filter-btn,
+.filter-input,
+.filter-label{
+    margin-left: 5px;
+    width: 90%;
+}
+
+/* Фильтры End */
+
+.article-content {
+    white-space: pre-line;
+  }
+
+.color-red{
+    color: red;
+}
+
+.news-photo{
+    width: 500px;
+    height: 500px;
+}
+
+.news-title{
+    color: black;
+}
+.news-title:hover{
+    color: black; 
+}

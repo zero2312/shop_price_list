@@ -1,0 +1,74 @@
+{% extends "shop/base.html" %}
+{% load mptt_tags %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    {%for item in products%}
+    {% if forloop.first %}
+    <h3 class="heder-produt-title text-center ">{{ item.category }}</h1>
+    {% endif %}
+        {% endfor %}
+    <ul class="product-list row">
+        <!-- !Сортировка цен Menu -->
+        <div class="menu-container">
+            <div class="dropdown filter-list">
+                <a class="btn btn-purple btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Сортировка 
+                </a>
+                <ul class="dropdown-menu filter-menu" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="?sort=asc">Сортировка по возрастанию цены</a></li>
+                  <li><a class="dropdown-item" href="?sort=desc">Сортировка по убыванию цены</a></li>
+                </ul>
+              </div>
+    
+              <div class="dropdown filter-list">
+                <a class="btn btn-purple btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Фильтр
+                </a>
+                <ul class="dropdown-menu filter-menu" aria-labelledby="dropdownMenuLink">
+                    <form  method="get">
+                        <label class="form-label filter-label" for="min_price">Минимальная цена:</label>
+                        <input class="form-control filter-input" type="number" name="min_price" id="min_price" value="{{ request.GET.min_price }}">
+                
+                        <label class="form-label filter-label" for="max_price">Максимальная цена:</label>
+                        <input class="form-control filter-input" type="number" name="max_price" id="max_price" value="{{ request.GET.max_price }}">
+                        <p></p>
+                        <button class="btn btn-purple btn-sm filter-btn" type="submit">Фильтровать</button>
+                      </form>
+                </ul>
+              </div>
+        </div>
+        <!-- !Сортировка цен end  -->
+        <!-- !Отображение товара (Картачка) -->
+        {%for item in products%}
+        <li class="col-lg-3 p-4">
+            <div class="card" style="width: 18rem;">
+                <h5 class="card-title text-center">{{item.title}}</h5>
+                <img src="{{item.photo.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">{{item.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Цена - {{item.price}}₽</li>
+                    <!--? Через For проходимся по всем группам -->
+                    {% for group in request.user.groups.all %}
+                    <!--? Если группа пользователя 'VIP' - Вводим опт цену -->
+                    {% if group.name == 'VIP' %}
+                    <li class="list-group-item">Цена.опт - {{item.wholesalePrice}}₽</li>
+                    {% endif %}
+                    {% endfor %}
+                    <li class="list-group-item">Категория - {{item.category}}</li>
+                    <li class="list-group-item">Количество - {{item.cost}}</li>
+                </ul>
+                {% if user.is_authenticated %}
+                <div class="card-body">
+                    <a type="button" class="btn btn-success" href="{% url 'add_to_cart' product_id=item.pk%}">Купить</a>
+                </div>
+                {% endif %}
+                {% endfor %}
+        </li>
+    </ul>
+    <!-- !Отображение товара (Картачка) End -->
+</div>
+{% endblock %}
